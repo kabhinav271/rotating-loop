@@ -48,6 +48,22 @@ body {
   line-height: 1.5;
 }
 
+#playMusicBtn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #ff8a4c, #ff6b4a);
+  cursor: pointer;
+}
+
+.music-status {
+  color: #ffd8c8;
+  font-size: 0.9rem;
+}
+
 .info-panel .credit {
   margin-top: auto;
   color: #ffb18f;

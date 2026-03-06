@@ -1,19 +1,42 @@
 ﻿// P = position change from 0 to 1
 let p = 0;
 let angle = 0;
+let musicStarted = false;
 
-const bgm = new Audio("../music.mp3");
+const bgm = new Audio("./music.mp3");
 bgm.loop = true;
 bgm.preload = "auto";
 
-function tryStartMusic() {
-  bgm.play().catch(() => {
-    // Autoplay can be blocked until first user interaction.
-  });
+const musicBtn = document.getElementById("playMusicBtn");
+const musicStatus = document.getElementById("musicStatus");
+
+function setMusicStatus(text) {
+  if (musicStatus) {
+    musicStatus.textContent = text;
+  }
 }
 
-window.addEventListener("pointerdown", tryStartMusic, { once: true });
-window.addEventListener("keydown", tryStartMusic, { once: true });
+function tryStartMusic() {
+  if (musicStarted) {
+    return;
+  }
+
+  bgm.play()
+    .then(() => {
+      musicStarted = true;
+      setMusicStatus("Music is playing.");
+    })
+    .catch(() => {
+      setMusicStatus("Click Play Music to start audio.");
+    });
+}
+
+window.addEventListener("pointerdown", tryStartMusic);
+window.addEventListener("keydown", tryStartMusic);
+
+if (musicBtn) {
+  musicBtn.addEventListener("click", tryStartMusic);
+}
 
 function setup() {
   createCanvas(900, 900).parent("visual");
